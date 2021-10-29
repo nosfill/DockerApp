@@ -15,3 +15,4 @@ The Docker image of the application I wanted to use was not available on Docher 
 > Tigress:  
 > In this repository, binary that be needed for installation is ignored.  
 > (Please download from [official homepage](https://tigress.wtf/index.html))
+> Place the binary in tigress/resource
