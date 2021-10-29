@@ -1,25 +1,23 @@
 FROM ubuntu:bionic
 
-RUN useradd -m ollvm
-WORKDIR /home/ollvm
-ENV HOME /home/ollvm
-
+WORKDIR /opt/ollvm
 RUN apt-get -y update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y   \
         build-essential \
         cmake \
         git \
         python3 && \
+    git clone -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator.git /opt/obfuscator && \
+    cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_INCLUDE_TESTS=OFF /opt/obfuscator/ && \
+    make -j7 && \
+    rm -rf /opt/obfuscator && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    useradd -m ollvm
 
 USER ollvm
-RUN git clone -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator.git && \
-        mkdir build && \
-        cd build && \
-        cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_INCLUDE_TESTS=OFF ../obfuscator/ && \
-        make -j7
+WORKDIR /home/ollvm
+ENV HOME /home/ollvm
+ENV PATH /opt/ollvm/bin:$PATH
 
-ENV PATH /home/ollvm/build/bin:$PATH
-
-ENTRYPOINT ["/home/ollvm/build/bin/clang"]
+ENTRYPOINT ["/opt/ollvm/bin/clang"]
