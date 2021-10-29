@@ -28,6 +28,13 @@ The Docker image of the application I wanted to use was not available on Docher 
     docker run --rm --mount type=bind,src=$(pwd),dst=/work ollvm [Option] [Path] 
     ```
 
+1. (use shell) Run container
+
+    ```bash
+    docker run --rm --mount type=bind,src=$(pwd),dst=/work --entrypoint='/bin/bash' ollvm 
+    ```
+
+
 ### Tigress
 
 > Note:  
@@ -44,4 +51,10 @@ The Docker image of the application I wanted to use was not available on Docher 
 
     ```bash
     docker run --rm --mount type=bind,src=$(pwd),dst=/work tigress [Option] [Path] 
+    ```
+
+1. (use shell) Run container
+
+    ```bash
+    docker run --rm --mount type=bind,src=$(pwd),dst=/work --entrypoint='/bin/bash' tigress
     ```
