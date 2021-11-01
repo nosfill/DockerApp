@@ -31,7 +31,7 @@ The Docker image of the application I wanted to use was not available on Docher 
 1. (use shell) Run container
 
     ```bash
-    docker run --rm --mount type=bind,src=$(pwd),dst=/work --entrypoint='/bin/bash' ollvm 
+    ./scripts/login_bash.sh ollvm
     ```
 
 
@@ -56,5 +56,5 @@ The Docker image of the application I wanted to use was not available on Docher 
 1. (use shell) Run container
 
     ```bash
-    docker run --rm --mount type=bind,src=$(pwd),dst=/work --entrypoint='/bin/bash' tigress
+    ./scripts/login_bash.sh tigress
     ```
